@@ -1,0 +1,21 @@
+{% extends "index.html" %}
+
+{% block title %}
+    <title>Liveness Detection Api Home Page</title>
+{% endblock title %}
+
+{% block content %}
+    <h1>Welcome to liveness face detection, my man!</h1>
+
+    <hr>
+
+    <p style='color:gray'>To use this api, you will need to send two images encoded using Base64 to the following address
+    <br>
+    <b style='color:red'>Address: [server_address]/predict</b>
+    <br>
+    </p>
+    
+    <hr>
+
+    <p>Special thanks to <b><i>Facebook Conference on Computer Vision and Pattern Recognition (CVPR)</i></b> and <b><i>MobileNetV2 Team</i></b> for making this possible</p>
+{% endblock content%}
