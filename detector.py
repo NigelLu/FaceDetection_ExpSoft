@@ -22,8 +22,7 @@ class Detector:
         self.model = load_model(os.path.join(os.getcwd(), "model/liveness_mobile.model"))
         self.le = pickle.loads(open(os.path.join(os.getcwd(), "le.pickle"), "rb").read())
 
-    def predict(self, true_img, test_img, confidence_threshold):
-        true_img = imutils.resize(true_img, width=600)
+    def liveness(self, test_img, confidence_threshold):
         test_img = imutils.resize(test_img, width=600)
 
         (h, w) = test_img.shape[:2]
@@ -67,20 +66,17 @@ class Detector:
                 label = self.le.classes_[j]
 
                 real_face= bool(label)
-
-
                 
                 # if this is a real live face, we change the liveness_result to True and break out of the loop
                 if real_face:
                     liveness_result = True
-                    break
+                    return liveness_result
         
-        # if there is a live face in the test image, we verify it against our true image
-        if liveness_result:
-            return DeepFace.verify(true_img, test_img)['verified']
+        return liveness_result
 
-        # if nothing matches, we return False
-        return False
+    def match(self, true_img, test_img):
+        # if there is a live face in the test image, we verify it against our true image
+        return DeepFace.verify(true_img, test_img)['verified']
 
 
 # just for testing purposes
